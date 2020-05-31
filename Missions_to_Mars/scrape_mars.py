@@ -3,22 +3,21 @@ from bs4 import BeautifulSoup
 import requests
 import datetime as dt
 import time
-# import pandas as pd
 
 def init_browser():
-    # @NOTE: Replace the path with your actual path to the chromedriver
-    executable_path = {"executable_path": 'C:/Users/pli.TELOS/Desktop/web-scraping-challenge/Missions_to_Mars/chromedriver.exe'}
-    # executable_path = {"executable_path": "chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
-
+    # Execute chromedriver
+    executable_path = {'executable_path': 'chromedriver.exe'} 
+    # Set headless to True for chromedrive to run in background to avoid annoying pop ups. 
+    return Browser("chrome", **executable_path, headless=True)
+   
 
 def scrape():
-#  code from jupyter notebook  
+#  code tested in jupyter notebook  
   
-
-    browser = init_browser()
-    # *********Scrape Title & Paragraph*********************************
+    
+    # *********Scrape <NASA Mars News Latest News Title and Paragraph Text>******************************************
    
+    browser = init_browser()
     url = 'https://mars.nasa.gov/news/'
     browser.visit(url)
     time.sleep(5)
@@ -32,9 +31,8 @@ def scrape():
 
 
 
-    # *********Full Image*********************************
-    
-    
+    # *********Scrape <JPL Mars Space Images - Featured Image>**************************************************
+     
     browser = init_browser()
     image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(image_url)
@@ -49,11 +47,15 @@ def scrape():
     suffix_inner = suffix_ur.find('a').get('href')
     featured_image_url = "https://www.jpl.nasa.gov" + suffix_inner 
     
+
+     # *********Scrape <Mars Facts table>**********************************************************************
+     
     
- # *********Mars Hemisphere*********************************
+    
+    
+    # *********Scrape <Mars Hemispheres Image>******************************************************************
 
     browser = init_browser()
-    # browser = Browser('chrome', **executable_path, headless=False) 
     image_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(image_url)
     time.sleep(5)
@@ -64,7 +66,9 @@ def scrape():
     base_url = "https://astrogeology.usgs.gov" 
     html = browser.html
     soup = BeautifulSoup(html,'html.parser')
+    
 
+    # Append title and image url to list  
     for x in element_item:
         h3_title=x.find('h3').text
         sub_page_url = x.find('a').get('href')
@@ -79,14 +83,9 @@ def scrape():
     image_list   
 
 
-# **************************************************************
-    # browser.quit() 
+    # ********* Store results in dictionary ***************************************************************
+    # ---browser.quit() 
     mars_dict = {"header": new_title,"paragraph": news_p, "full_image":featured_image_url,"hemisphere":image_list}
-    # "full_image":featured_image_url
     return mars_dict
 
 
-
-# No need to run flask on this py, so we can omit below. 
-# if __name__ == "__main__":
-#     app.run(debug=True)
