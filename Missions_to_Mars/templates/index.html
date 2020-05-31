@@ -11,56 +11,44 @@
 
 <body>
   <div class="container">
-    <!-- div 1-->
     <div class="jumbotron text-center">
       <h1>Mission to Mars</h1>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
       <!-- href'"/scrape" calling scrape route from flask -->
     </div>
-    
-
-    <div class= "row">
-      <h2>Lastest Mars News</h2>
+ 
+    <!-- NASA Mars News -->
+    <div class= "row" style="margin-left: auto;">
+      <h3><strong>Lastest Mars News</strong></h3>
       <h4>{{mars.header}}</h4>
       <p>{{mars.paragraph }}</p>
     </div>
     
-
-
-    <!-- NASA Mars News -->
-    <div class="row">
+    <!-- NASA Mars News Image -->
+    <div class="row" style="margin-top: 30px;">
       <div class="col-md-8 col-sm-6">
-        <!-- <h2>Lastest Mars News</h2>
-        <h4>{{mars.header}}</h4>
-        <p>{{mars.paragraph }}</p>
-        <br> -->
-        <h3>Featured Mars Image</h3>
-        <img src="{{mars.full_image}}" width=600px alt="Full Mars Image">
+        <h4><strong>Featured Mars Image</strong></h4>
+        <img src="{{mars.full_image}}" width=600px>
       </div>
 
       <!-- Facts Table -->
       <div class="col-md-4 cold-sm-6">
-        <h3>Current Mars Weather</h3>
+        <h4><strong>Mars Weather</strong></h4>
         <p>{{mars.facts_table|safe}}</p>
         <!--Use safe filter to explicilty mark string as "safe", Jinja to escape variables not included as HTML -->
       </div>
     </div>
 
-
-    <!-- <div class="row"> -->
     <!-- NASA Hemisphere -->
-    <div class="container text-center" style="margin: 60px;">
-      <!-- NASA Mars News -->
+    <div class="container text-center" style="margin: 80px;">
       <div class="row">
-        <!-- ***row A start-->
-        
-          <!-- col-md-offset-2 -->
-          <h2>Mars Hemispheres</h2>
+          <h3><strong>Mars Hemispheres</strong></h3>
+          <hr/>    <!-- bootstrap styles horizontal rule -->
           <!-- jinja -->
           {% for pic in mars.hemisphere %}
           <div class="col-md-6">
           <img src="{{ pic.image_url }}" width=400px>
-          <h4 style="margin-bottom: 60px">{{ pic.title }}</h4>
+          <h5 style="margin-bottom: 60px"><strong>{{ pic.title }}</strong></h5>
           </div>
           {% endfor %}
           <!-- jinja-->
@@ -69,8 +57,7 @@
     </div>
 
 
-    <!-- </div> -->
-  </div>
+     </div>
 </body>
 
 </html>
