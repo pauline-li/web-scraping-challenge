@@ -1,8 +1,12 @@
+# Dependencies
 from splinter import Browser
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
 import datetime as dt
 import time
+
+
 
 def init_browser():
     # Execute chromedriver
@@ -49,10 +53,15 @@ def scrape():
     
 
      # *********Scrape <Mars Facts table>**********************************************************************
-     
+    image_url = 'https://space-facts.com/mars/'
+    tables = pd.read_html(image_url) # read image url to data frame
+    df=tables[0] # get first table 
+    df.columns=['Diameter','Mass']
+    df.set_index('Diameter', inplace=True) 
+    html_table = df.to_html()    
+    html_table.replace('\n', '')
     
-    
-    
+
     # *********Scrape <Mars Hemispheres Image>******************************************************************
 
     browser = init_browser()
@@ -85,7 +94,7 @@ def scrape():
 
     # ********* Store results in dictionary ***************************************************************
     # ---browser.quit() 
-    mars_dict = {"header": new_title,"paragraph": news_p, "full_image":featured_image_url,"hemisphere":image_list}
+    mars_dict = {"header": new_title,"paragraph": news_p, "full_image":featured_image_url,"hemisphere":image_list, "facts_table": html_table}
     return mars_dict
 
 

@@ -18,42 +18,25 @@
       <!-- href'"/scrape" calling scrape route from flask -->
     </div>
 
-    <!-- NASA Mars News -->
+<!-- NASA Mars News -->
     <div class="row">
-      <!-- ***row A start-->
       <div class="col-md-8 col-md-offset-2">
         <h2>Lastest Mars News</h2>
-        <!-- full_image...name of key -->
-        <h4>{{mars.header}}</h4>
+        <h4>{{mars.header}}</h4> 
         <p>{{mars.paragraph }}</p>
         <br>
         <h3>Featured Mars Image</h3>
         <img src="{{mars.full_image}}" width=700px alt="Full Mars Image">
       </div>
 
+<!-- Facts Table -->     
       <div class="col-md-4 col-md-offset-2">
         <h3>Current Mars Weather</h3>
-        <p>Weather available in tweet.</p>
+        <p>{{mars.facts_table|safe}}</p> <!--Use safe filter to explicilty mark string as "safe", Jinja to escape variables not included as HTML -->
       </div>
-    </div> <!-- ***row A end-->
-    <br>
-    <!-- NASA Mars News -->
-    <div class="row">
-      <!-- ***row A start-->
-      <div class="col-md-8 col-md-offset-2">
-        <h2>H2 Placeholder</h2>
-        <!-- full_image...name of key -->
-        <h4>{{mars.header}}</h4>
-        <p>{{mars.paragraph }}</p>
-      </div>
-      <div class="col-md-4 col-md-offset-2">
-        <h2>H2 Placeholder</h2>
-        <p>Weather available in tweet.</p>
-      </div>
-    </div> <!-- ***row A end-->
-
-
-    <!-- NASA Hemisphere -->
+    </div> 
+ 
+<!-- NASA Hemisphere -->
     <div class="container text-center">
       <!-- NASA Mars News -->
       <div class="row">
@@ -68,23 +51,10 @@
           <!-- jinja-->
         </div>
       </div>
-    </div> <!-- ***row A end-->
-    <!-- NASA Hemisphere End-->
+    </div> 
+    
 
-
-
-  </div> <!-- div 1-->
-  <br>
-
-  <!-- NASA Mars News -->
-
-
-
-
-
-
-
-
-</body>
+  </div> 
+ </body>
 
 </html>
