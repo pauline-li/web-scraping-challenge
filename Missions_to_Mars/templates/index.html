@@ -17,20 +17,29 @@
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
       <!-- href'"/scrape" calling scrape route from flask -->
     </div>
+    
+
+    <div class= "row">
+      <h2>Lastest Mars News</h2>
+      <h4>{{mars.header}}</h4>
+      <p>{{mars.paragraph }}</p>
+    </div>
+    
+
 
     <!-- NASA Mars News -->
     <div class="row">
-      <div class="col-md-8 offset-md-4">
-        <h2>Lastest Mars News</h2>
+      <div class="col-md-8 col-sm-6">
+        <!-- <h2>Lastest Mars News</h2>
         <h4>{{mars.header}}</h4>
         <p>{{mars.paragraph }}</p>
-        <br>
+        <br> -->
         <h3>Featured Mars Image</h3>
-        <img src="{{mars.full_image}}" width=700px alt="Full Mars Image">
+        <img src="{{mars.full_image}}" width=600px alt="Full Mars Image">
       </div>
 
       <!-- Facts Table -->
-      <div class="col-md-4">
+      <div class="col-md-4 cold-sm-6">
         <h3>Current Mars Weather</h3>
         <p>{{mars.facts_table|safe}}</p>
         <!--Use safe filter to explicilty mark string as "safe", Jinja to escape variables not included as HTML -->
@@ -38,27 +47,30 @@
     </div>
 
 
-    <div class="row">
-      <!-- NASA Hemisphere -->
-      <div class="container text-center">
-        <!-- NASA Mars News -->
-        <div class="row">
-          <!-- ***row A start-->
-          <div class="col-md-12 col-md-offset-2">
-            <h2>Mars Hemispheres</h2>
-            <!-- jinja -->
-            {% for pic in mars.hemisphere %}
-            <img src="{{ pic.image_url }}" width=250px>
-            <h4>{{ pic.title }}</h4>
-            {% endfor %}
-            <!-- jinja-->
+    <!-- <div class="row"> -->
+    <!-- NASA Hemisphere -->
+    <div class="container text-center" style="margin: 60px;">
+      <!-- NASA Mars News -->
+      <div class="row">
+        <!-- ***row A start-->
+        
+          <!-- col-md-offset-2 -->
+          <h2>Mars Hemispheres</h2>
+          <!-- jinja -->
+          {% for pic in mars.hemisphere %}
+          <div class="col-md-6">
+          <img src="{{ pic.image_url }}" width=400px>
+          <h4 style="margin-bottom: 60px">{{ pic.title }}</h4>
           </div>
-        </div>
+          {% endfor %}
+          <!-- jinja-->
+        
       </div>
-
-
     </div>
-  </div>  
+
+
+    <!-- </div> -->
+  </div>
 </body>
 
 </html>
